@@ -338,17 +338,15 @@
         function	postarPontuacao() {
 		    //	API	de	feed	do	Facebook
 			FB.ui(
-			    {
-			        method:	'feed',
-					name:	'Jogo	de	Nave',
-					caption:	'Jogue	e	compartilhe	com	seus	amigos!',
-					description:	(
-						'Minha	pontuação	foi:	'	+	painel.pontuacao
-					),
-					link:	'https://wesleylm.github.io/JogoNave/'
-					},
-					function(response) {}
-					);							
+			    	{
+			        	method:	'feed',
+					name: 'Jogo	de	Nave',
+					caption: 'Jogue	e compartilhe com seus	amigos!',
+					description: ( 'Minha	pontuação foi:	' + painel.pontuacao),
+					link: 'https://wesleylm.github.io/JogoNave/'
+				},
+				function(response) {}
+			);							
 		}
     </script>
 </body>
