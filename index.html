@@ -40,8 +40,18 @@
             width: 52px;
             height: 26px;
             padding: 23px 10px;
-
+                        
         }
+        #postar_pontuacao	{
+			/*	Ocultar	o	link	*/
+			display:	none;
+			/*	Visual	a	gosto!	*/
+			color:	yellow;									
+			position:	absolute;
+			left: 180px;
+			top: 410px;
+		}
+        
     </style>
     <script>
   window.fbAsyncInit = function() {
@@ -59,6 +69,7 @@
     <canvas id="canvas_animacao" width="500" height="500"></canvas>
     <a id="link_jogar" href="javascript: iniciarJogo()">Jogar</a>
     <div class="fb-share-button" data-href="https://wesleylm.github.io/JogoNave/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
+    <a	id="postar_pontuacao" href="javascript:	postarPontuacao()"> Compartilhar Pontuação </a>       
     <script>
         //Canvas e COntexto
         var canvas = document.getElementById('canvas_animacao');
@@ -78,6 +89,8 @@
         }
 
         function iniciarJogo(){
+            document.getElementById('postar_pontuacao').style.display = 'none';
+           
             criacaoInimigos.ultimoOvni = new Date().getTime();
 
             //Tiro
@@ -310,6 +323,9 @@
             colisor.novoSprite(nave)
 
             removerInimigos();
+            
+            //	Link	de	postar	pontuação
+			document.getElementById('postar_pontuacao').style.display =	'block';
         }
 
         function removerInimigos(){
@@ -318,6 +334,22 @@
                     animacao.excluirSprite(animacao.sprites[i]);
             }
         }
+    
+        function	postarPontuacao() {
+		    //	API	de	feed	do	Facebook
+			FB.ui(
+			    {
+			        method:	'feed',
+					name:	'Jogo	de	Nave',
+					caption:	'Jogue	e	compartilhe	com	seus	amigos!',
+					description:	(
+						'Minha	pontuação	foi:	'	+	painel.pontuacao
+					),
+					link:	'http://sua_hospedagem_aqui'
+					},
+					function(response) {}
+					);							
+		}
     </script>
 </body>
 </html>
